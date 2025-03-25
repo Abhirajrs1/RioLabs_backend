@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import Session  from 'express-session';
+import mongoose from 'mongoose';
 
 dotenv.config()
 
@@ -40,7 +41,7 @@ const connectDB = async () => {
   }));
 
   app.use(express.json({ limit: '100mb' }));
-app.use(express.urlencoded({ limit: '100mb', extended: true }))
+  app.use(express.urlencoded({ limit: '100mb', extended: true }))
 
   connectDB().then(() => {
     app.listen(port, () => {
