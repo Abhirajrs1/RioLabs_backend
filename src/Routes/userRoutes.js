@@ -9,6 +9,8 @@ router.post('/user-register',userController.signup)
 router.post('/user-login',userController.login)
 router.get('/verify',authMiddleware.userMiddleware,userController.isVerify)
 router.get('/logout',authMiddleware.userMiddleware,userController.logout)
+router.get('/getUser/:id',authMiddleware.userMiddleware,userController.profileEdit)
+router.put('/updateProfile/:id',authMiddleware.userMiddleware,userController.updateName)
 
 router.get('/getAllUsers',authMiddleware.userMiddleware,adminController.getAllUsers)
 router.put('/updateUserRole/:id',authMiddleware.userMiddleware,adminController.changeUserToAdmin)

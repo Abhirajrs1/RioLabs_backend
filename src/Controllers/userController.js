@@ -104,7 +104,32 @@ const userController = {
             logger.error(`Logout error: ${error.message}`);
             return res.status(500).json({ success: false, message: "Internal server error" });
         }
-    }
+    },
+    profileEdit: async (req, res) => {
+        try {
+          const user = await User.findById(req.params.id);
+          if (!user) return res.status(404).json({ error: 'User not found' });
+          res.json(user);
+        } catch (err) {
+          res.status(500).json({ error: 'Server error' });
+        }
+      },
+     updateName: async (req, res) => {
+        try {
+          const { name } = req.body;
+          const updatedUser = await User.findByIdAndUpdate(
+            req.params.id,
+            { name },
+            { new: true } 
+          );
+      
+          if (!updatedUser) return res.status(404).json({ error: 'User not found' });
+      
+          res.json({ name: updatedUser.name });
+        } catch (err) {
+          res.status(500).json({ error: 'Server error' });
+        }
+      }   
 };
 
 export default userController;
